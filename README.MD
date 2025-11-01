@@ -1,14 +1,15 @@
-PerlinDrawer
+# PerlinDrawer
+
 A Python script for generating beautiful Perlin noise-based images with gradients and "holes" effects. It uses Simplex and Perlin noise algorithms to create visually appealing patterns, optimized for performance with upscaling and Gaussian filtering.
 
-##Features
+## Features
 - Generate Perlin and Simplex noise fields
 - Create gradient images from one color to another
 - Produce "holes" effects with multiple colors and thresholds
 - Multithreaded generation for faster processing
 - Command-line interface for easy usage
 
-##Dependencies
+## Dependencies
 - numpy
 - scipy
 - imageio
