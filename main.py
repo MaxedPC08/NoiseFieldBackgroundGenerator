@@ -215,15 +215,20 @@ def main(w, h, hue, filename=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate Perlin noise images.")
-    parser.add_argument("--blog", action="store_true", help="Save the generated images to disk.")
+    parser.add_argument("--save", action="store_true", help="Save the generated image to disk.")
+    parser.add_argument("--width", type=int, default=1440, help="Width of the image (default: 1440)")
+    parser.add_argument("--height", type=int, default=2560, help="Height of the image (default: 2560)")
+    parser.add_argument("--hue", type=float, default=None, help="Hue for colors (random if not specified)")
+    parser.add_argument("--fname", type=str, default=None, help="File Name to save the generated image under")
     args = parser.parse_args()
 
-    if args.blog:
-        main(1440, 2560, np.random.random())
+    if args.save:
+        hue = args.hue if args.hue is not None else np.random.random()
+        main(args.width, args.height, hue, args.fname)
     else:
         start = time.time()
-        hue = np.random.random()
-        thread1 = threading.Thread(target=main, args=(1440, 2560, hue))
+        hue = args.hue if args.hue is not None else np.random.random()
+        thread1 = threading.Thread(target=main, args=(args.width, args.height, hue))
         thread2 = threading.Thread(target=main, args=(1080, 1920, hue))
 
         thread1.start()
@@ -232,5 +237,3 @@ if __name__ == "__main__":
         thread1.join()
         thread2.join()
         print('Time taken: %.4f seconds' % (time.time() - start))
-
-    # main()
